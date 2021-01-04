@@ -1,0 +1,27 @@
+$dark-mode: #070611;
+
+$body-bg: $dark-mode;
+$dark: $dark-mode;
+$custom-light: #39336B;
+
+@import "../bootstrap/scss/bootstrap.scss";
+
+$font-family-base: 'Lato', sans-serif;
+
+.style-logo {
+    filter: brightness(0) saturate(100%) invert(17%) sepia(46%) saturate(1417%) hue-rotate(216deg) brightness(94%) contrast(88%);
+}
+
+.border-custom-light {
+    border-color: $custom-light !important;
+}
+
+.card {
+    transition-duration: .5s;
+    transition-property: background-color;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.card:hover {
+    background-color: adjust-color($dark, $lightness: 7%) !important;
+}
