@@ -36,15 +36,11 @@
             </div>
             <div class="col">
                 <div class="card bg-dark border border-custom-light h-100" id="medium">
-                    <a href="https://medium.com/@tomwhite_40233" target="_blank" class="text-decoration-none text-reset">
+                    <a href="https://tomwhite-40233.medium.com/" target="_blank" class="text-decoration-none text-reset">
                     <div class="card-body text-center">
                         <img class="style-logo" src="Artboard 1 trimmed.svg">
                     </div>
                     </a>
-                    <div class="list-group-item inner-content-card bg-dark border border-custom-light mx-auto">
-                        <h4>Article Title</h4>
-                        <p class="card-text">This is a lone element.</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -52,6 +48,8 @@
 
     <script type="module">
         // TODO look into GraphQL API for pinned repos
+        let template = document.querySelector("#inner-content-card-template")
+
         fetch("https://api.github.com/users/tmwbook/repos")
         .then((resp) => {
             return resp.json()
@@ -60,15 +58,28 @@
             data.sort((a,b) => (new Date(a.updated_at) > new Date(b.updated_at) ? -1 : 1))
             let latest = data.slice(0, 5)
             let github_section = document.querySelector("#github")
-            let template = document.querySelector("#inner-content-card-template")
-            console.log(Mustache);
 
             latest.forEach((repo) => {
-                console.log(repo.full_name, repo.description || "", repo.html_url)
                 github_section.insertAdjacentHTML("beforeend", Mustache.render(template.innerHTML, {
                     slice_link: repo.html_url,
                     header: repo.full_name,
                     description: repo.description || `Primary language: ${repo.language}`
+                }))
+            })
+        })
+
+        fetch("https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40tomwhite-40233")
+        .then((resp) => resp.json())
+        .then((data) => {
+            let articles = data.items
+            let latest = articles.slice(0, 5)
+            let medium_section = document.querySelector("#medium")
+
+            latest.forEach((article) => {
+                medium_section.insertAdjacentHTML("beforeend", Mustache.render(template.innerHTML, {
+                    slice_link: article.guid,
+                    header: article.title,
+                    description: `Categories: ${article.categories.join(", ")}`
                 }))
             })
         })
