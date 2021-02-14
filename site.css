@@ -10636,6 +10636,10 @@ textarea.form-control-lg {
   border-color: #39336B !important;
 }
 
+.col.media-feed {
+  margin: 2rem 0rem 0rem;
+}
+
 .card, .card .inner-content-card {
   transition-property: background-color;
   transition-duration: 0.5s;

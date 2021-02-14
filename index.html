@@ -14,9 +14,9 @@
             <a href="index.html" class="navbar-brand link-light">Tom White</a>
         </div>
     </nav>
-    <div class="container" style="padding-top: 5em;">
+    <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col media-feed">
                 <div class="card bg-dark border border-custom-light h-100" id="github">
                     <a href="https://github.com/tmwbook" target="_blank" class="text-decoration-none text-reset">
                     <div class="card-body text-center">
@@ -33,7 +33,7 @@
                     </template>
                 </div>
             </div>
-            <div class="col">
+            <div class="col media-feed">
                 <div class="card bg-dark border border-custom-light h-100" id="medium">
                     <a href="https://tomwhite-40233.medium.com/" target="_blank" class="text-decoration-none text-reset">
                     <div class="card-body text-center">
@@ -50,9 +50,7 @@
         let template = document.querySelector("#inner-content-card-template")
 
         fetch("https://api.github.com/users/tmwbook/repos")
-        .then((resp) => {
-            return resp.json()
-        })
+        .then((resp) => resp.json())
         .then((data) => {
             data.sort((a,b) => (new Date(a.updated_at) > new Date(b.updated_at) ? -1 : 1))
             let latest = data.slice(0, 5)

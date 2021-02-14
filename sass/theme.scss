@@ -16,6 +16,10 @@ $font-family-base: 'Lato', sans-serif;
     border-color: $custom-light !important;
 }
 
+.col.media-feed {
+    margin: 2rem 0rem 0rem;
+}
+
 .card {
     //TODO fancy size and opacity transition as rows load in
     transition-property: background-color;
