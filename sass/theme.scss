@@ -3,6 +3,7 @@ $dark-mode: #070611;
 $body-bg: $dark-mode;
 $dark: $dark-mode;
 $custom-light: #39336B;
+$custom-very-light: adjust-color($custom-light, $lightness: 50%);
 
 @import "../bootstrap/scss/bootstrap.scss";
 
@@ -16,11 +17,20 @@ $font-family-base: 'Lato', sans-serif;
     border-color: $custom-light !important;
 }
 
+.text-custom-very-light {
+    color: $custom-very-light;
+}
+
 .col.media-feed {
     margin: 2rem 0rem 0rem;
 }
 
-.card {
+.container.text-content {
+    margin-top: 2rem;
+    width: 60rem;
+}
+
+.media-feed .card {
     //TODO fancy size and opacity transition as rows load in
     transition-property: background-color;
     transition-duration: .5s;
