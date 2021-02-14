@@ -17,11 +17,29 @@ $font-family-base: 'Lato', sans-serif;
 }
 
 .card {
-    transition-duration: .5s;
+    //TODO fancy size and opacity transition as rows load in
     transition-property: background-color;
+    transition-duration: .5s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-}
 
-.card:hover {
-    background-color: adjust-color($dark, $lightness: 7%) !important;
+    padding-bottom: .5rem;
+
+    &:hover {
+        background-color: adjust-color($dark, $lightness: 7%) !important;
+    }
+
+    .inner-content-card {
+        @extend .card;
+        width: 95%;
+
+        &.list-group-item {
+            border-radius: .25rem; //Standard bootsrap radius
+            margin: .25rem 0rem;
+            padding: .5rem 1rem; //Standard bootstrap padding
+        }
+
+        &:hover {
+            background-color: adjust-color($dark, $lightness: 20%) !important;
+        }
+    }
 }
