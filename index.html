@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="site.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:300,400" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.js" integrity="sha512-SDpqS2G7Z70bGQSl26nhAdQj9YJoQqMOJVBVqE1EyEaAAzdvLFNZ0R06FzBu+E8xTcmbd2dBhvBJuJrbEUiKqA==" crossorigin="anonymous"></script>
     <title>Thomas White</title>
 </head>
 <body class="container text-light">
@@ -23,15 +24,14 @@
                         <img class="style-logo" src="GitHub-Mark.svg">
                     </div>
                     </a>
-                    <a href="https://google.com" target_="_blank" class="text-decoration-none text-reset">
-                    <div class="list-group-item inner-content-card bg-dark border border-custom-light mx-auto">
-                        <h4>tmwbook/RepoName</h1>
-                        <p class="card-text">github. link to a pojects page or something else?</p>
-                    </div>
-                    </a>
-                    <div class="list-group-item inner-content-card bg-dark border border-custom-light mx-auto">
-                        <p class="card-text">This is the second element</p>
-                    </div>
+                    <template id="inner-content-card-template">
+                        <a href="{{ slice_link }}" target="_blank" class="text-decoration-none text-reset">
+                        <div class="list-group-item inner-content-card bg-dark border border-custom-light mx-auto">
+                            <h4>{{ header }}</h4>
+                            <p class="card-text">{{ description }}</p>
+                        </div>
+                        </a>
+                    </template>
                 </div>
             </div>
             <div class="col">
@@ -49,5 +49,29 @@
             </div>
         </div>
     </div>
+
+    <script type="module">
+        // TODO look into GraphQL API for pinned repos
+        fetch("https://api.github.com/users/tmwbook/repos")
+        .then((resp) => {
+            return resp.json()
+        })
+        .then((data) => {
+            data.sort((a,b) => (new Date(a.updated_at) > new Date(b.updated_at) ? -1 : 1))
+            let latest = data.slice(0, 5)
+            let github_section = document.querySelector("#github")
+            let template = document.querySelector("#inner-content-card-template")
+            console.log(Mustache);
+
+            latest.forEach((repo) => {
+                console.log(repo.full_name, repo.description || "", repo.html_url)
+                github_section.insertAdjacentHTML("beforeend", Mustache.render(template.innerHTML, {
+                    slice_link: repo.html_url,
+                    header: repo.full_name,
+                    description: repo.description || `Primary language: ${repo.language}`
+                }))
+            })
+        })
+    </script>
 </body>
 </html>
