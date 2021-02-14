@@ -28,6 +28,29 @@ $font-family-base: 'Lato', sans-serif;
 .container.text-content {
     margin-top: 2rem;
     width: 60rem;
+
+    ul {
+        columns: 3;
+        width: 60%;
+
+        li {
+            padding-right: .25rem;
+        }
+    }
+
+    @media(max-width: 767px) {
+        ul{
+            columns: 2;
+            width: 100%;
+        }
+        width: 100%;
+    }
+    @media(max-width: 576px) {
+        ul{
+            columns: 1;
+            width: 50%;
+        }
+    }
 }
 
 .media-feed .card {

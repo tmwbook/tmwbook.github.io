@@ -10648,6 +10648,28 @@ textarea.form-control-lg {
   margin-top: 2rem;
   width: 60rem;
 }
+.container.text-content ul {
+  columns: 3;
+  width: 60%;
+}
+.container.text-content ul li {
+  padding-right: 0.25rem;
+}
+@media (max-width: 767px) {
+  .container.text-content {
+    width: 100%;
+  }
+  .container.text-content ul {
+    columns: 2;
+    width: 100%;
+  }
+}
+@media (max-width: 576px) {
+  .container.text-content ul {
+    columns: 1;
+    width: 50%;
+  }
+}
 
 .media-feed .card, .media-feed .card .inner-content-card {
   transition-property: background-color;
